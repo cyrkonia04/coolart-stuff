@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mavema's Crazy Commissions!</title>
+    <style>
+        /* SCENECORE / CLOWNCORE CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+        body {
+            background-color: #1a0a2e; /* Dark purple background */
+            color: #00ffff; /* Neon cyan text */
+            font-family: 'Comic Sans MS', 'Chalkboard SE', comic-sans, cursive;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Glowing Header */
+        h1 {
+            font-family: 'Bangers', cursive;
+            font-size: 4rem;
+            color: #ff00ff; /* Hot pink */
+            text-shadow: 3px 3px 0px #00ff00, -2px -2px 10px #00ffff; /* Neon glow */
+            margin-bottom: 10px;
+        }
+
+        /* Scrolling Marquee (Very 2000s Scene) */
+        .marquee {
+            background: #ff00ff;
+            color: #ffff00;
+            padding: 5px 0;
+            font-weight: bold;
+            border: 3px dashed #00ff00;
+            margin-bottom: 20px;
+        }
+
+        /* Tab Buttons */
+        .tab-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #000;
+            color: #00ff00;
+            border: 3px solid #ff00ff;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-family: 'Comic Sans MS', cursive;
+            cursor: pointer;
+            border-radius: 15px 15px 0px 0px;
+            transition: all 0.3s;
+        }
+
+        .tab-btn:hover {
+            background: #ff00ff;
+            color: #000;
+            border-color: #00ffff;
+            transform: scale(1.1);
+        }
+
+        .tab-btn.active {
+            background: #00ffff;
+            color: #000;
+            border-color: #ffff00;
+        }
+
+        /* Content Boxes */
+        .tab-content {
+            display: none;
+            background: rgba(0, 0, 0, 0.8);
+            border: 4px dashed #ffff00;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: popIn 0.4s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .art-piece {
+            border: 3px solid #ff00ff;
+            background: #fff;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 0.9rem;
+        }
+
+        /* Links */
+        a {
+            color: #ffff00;
+            text-decoration: none;
+            border-bottom: 2px dotted #ff00ff;
+        }
+        a:hover {
+            color: #ff00ff;
+            border-bottom: 2px solid #00ffff;
+        }
+
+        /* Floating GIF Placeholder */
+        .floating-gif {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            z-index: 1000;
+            filter: drop-shadow(0 0 10px #00ffff);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <h1>★ MAVEMA'S COMMISSIONS ★</h1>
+    
+    <!-- CHAOTIC MARQUEE -->
+    <div class="marquee">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            ★ OPEN FOR COMMISSIONS ★ WELCOME TO THE CIRCUS ★ SCENECORE VIBES ★ NEON CATS ★ CLOWN CORE ★
+        </marquee>
+    </div>
+
+    <!-- TABS NAVIGATION -->
+    <div class="tab-container">
+        <button class="tab-btn active" onclick="switchTab('about')">About Me!</button>
+        <button class="tab-btn" onclick="switchTab('gallery')">Gallery ✨</button>
+        <button class="tab-btn" onclick="switchTab('commissions')">Commissions 🤡</button>
+        <button class="tab-btn" onclick="switchTab('tos')">ToS / Rules</button>
+    </div>
+
+    <!-- TAB 1: ABOUT ME -->
+    <div id="about" class="tab-content active">
+        <h2 style="color: #ff00ff; text-align: center;">Hiii I'm Mavema! 👋</h2>
+        <p>Welcome to my wacky little corner of the internet! I am an artist who loves bright colors, scenecore fashion, clowns, and anything chaotic. </p>
+        <p>I use this page to take commissions so I can fund my neon habits. If you like my style, stick around and check out the rest of the tabs!</p>
+        <p style="text-align: center; margin-top: 20px;">
+            [ INSERT A PICTURE OF YOUR SONA / AVATAR HERE ]
+        </p>
+    </div>
+
+    <!-- TAB 2: GALLERY -->
+    <div id="gallery" class="tab-content">
+        <h2 style="color: #00ff00; text-align: center;">My Art!! 💖</h2>
+        <p>Here's some stuff I've drawn recently.</p>
+        <div class="gallery-grid">
+            <!-- We will replace these with real images later! -->
+            <div class="art-piece">Art 1</div>
+            <div class="art-piece">Art 2</div>
+            <div class="art-piece">Art 3</div>
+            <div class="art-piece">Art 4</div>
+            <div class="art-piece">Art 5</div>
+            <div class="art-piece">Art 6</div>
+        </div>
+    </div>
+
+    <!-- TAB 3: COMMISSIONS -->
+    <div id="commissions" class="tab-content">
+        <h2 style="color: #ffff00; text-align: center;">Get Some Art! 🎪</h2>
+        <p><strong>Status:</strong> <span style="color:#00ff00;">OPEN!</span></p>
+        
+        <h3 style="color: #ff00ff;">Prices:</h3>
+        <ul>
+            <li><strong>Doodle/Sketch:</strong> $10</li>
+            <li><strong>Flat Color:</strong> $25</li>
+            <li><strong>Full Shade + Background:</strong> $50+</li>
+        </ul>
+
+        <h3 style="color: #ff00ff;">How to Order:</h3>
+        <p>Email me at <strong>YOUR_EMAIL_HERE@gmail.com</strong> or DM me on Twitter/X with your reference sheets and what you want! Be as descriptive as possible~!</p>
+    </div>
+
+    <!-- TAB 4: TOS -->
+    <div id="tos" class="tab-content">
+        <h2 style="color: #00ffff; text-align: center;">The Rules (Please Read!) 📜</h2>
+        <ol>
+            <li><strong>Payment:</strong> I require payment upfront via PayPal or CashApp before I start drawing.</li>
+            <li><strong>Revisions:</strong> You get 2 free sketch revisions. After that, it's $5 per extra change.</li>
+            <li><strong>Will Draw:</strong> Furries, humans, scenecore ocs, clowns, weird creatures, mild gore.</li>
+            <li><strong>Won't Draw:</strong> Explicit NSFW, hate art, hard vore/mechanical stuff.</li>
+            <li><strong>Turnaround:</strong> Usually 1-2 weeks depending on my queue. If I'm busy, I'll let you know!</li>
+            <li><strong>Usage:</strong> You may post the art anywhere with credit. Please do NOT use my art for AI training or NFTs.</li>
+        </ol>
+    </div>
+
+    <!-- FLOATING NEON CAT GIF PLACEHOLDER -->
+    <!-- Replace the src link below with an actual scenecore/clowncore gif URL! -->
+    <img src="https://media.tenor.com/4L3Q2RHcXJQAAAAM/neon-cat.gif" alt="Neon Cat" class="floating-gif">
+
+    <!-- JAVASCRIPT FOR TABS -->
+    <script>
+        function switchTab(tabId) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show the selected tab and activate its button
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find the button that was clicked and activate it
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
