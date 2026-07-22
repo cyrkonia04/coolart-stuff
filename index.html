@@ -286,6 +286,30 @@
             border-color: #FFD700 !important;
         }
         /* Button styling update */
+
+        /* --- BASE STYLES FOR FUTURE DECORATIONS --- */
+        /* Use this class on any new images you add to the sides! */
+        .side-decor {
+            position: fixed;
+            z-index: 999; /* Keeps them behind your cat/disc (which are 1000) but above the background */
+            pointer-events: none; /* THIS IS MAGIC: It makes the image "ghostly" so you can still click buttons underneath it on PC! */
+        }
+
+        /* --- MOBILE FIXES --- */
+        @media (max-width: 600px) {
+            /* Forces exactly 2 tabs per line - NO SQUISHING ALLOWED */
+            .tab-btn {
+                width: calc(50% - 5px); /* Exactly 50% width minus half the 10px gap */
+                flex-grow: 0; /* Stops it from stretching to fill empty space */
+                flex-shrink: 0; /* STOPS FLEXBOX FROM SQUISHING IT TO FIT 3 IN A ROW */
+                text-align: center; /* Keeps the text centered in the new fixed-width box */
+            }
+
+            /* Hides ONLY the future extra decorations */
+            .side-decor {
+                display: none; 
+            }
+        }
     </style>
 </head>
 <body>
@@ -409,8 +433,7 @@
     <!-- FLOATING NEON CAT GIF (Right) -->
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbWsxaWl2Y3BhNW54MDExZTR6ejl2cm1scnVkb2Y5OWl4bDYwYmkweCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/7lsw8RenVcjCM/giphy.gif" alt="Neon Cat" class="floating-gif">
 
-    <!-- --- NEW: SPINNING IMAGE (Left) --- -->
-    <!-- Replace 'images/spinning_image.png' with your actual file path! -->
+    <!-- --- SPINNING IMAGE (Left) --- -->
     <img src="props/cooldisc.jpg" alt="Spinning Icon" class="spinning-img">
 
     <!-- JAVASCRIPT FOR TABS & GALLERY BUILDER -->
@@ -470,30 +493,6 @@
                 btn.style.borderColor = "#ffff00";
                 btn.style.color = "#ffff00";
             }
-        }
-
-        /* --- MOBILE FIXES --- */
-        @media (max-width: 600px) {
-            /* Forces exactly 2 tabs per line - NO SQUISHING ALLOWED */
-            .tab-btn {
-            width: calc(50% - 5px); /* Exactly 50% width minus half the 10px gap */
-            flex-grow: 0; /* Stops it from stretching to fill empty space */
-            flex-shrink: 0; /* STOPS FLEXBOX FROM SQUISHING IT TO FIT 3 IN A ROW */
-            text-align: center; /* Keeps the text centered in the new fixed-width box */
-        }
-
-        /* Hides ONLY the future extra decorations */
-        .side-decor {
-            display: none; 
-        }
-    }
-        
-        /* --- BASE STYLES FOR FUTURE DECORATIONS --- */
-        /* Use this class on any new images you add to the sides! */
-        .side-decor {
-            position: fixed;
-            z-index: 999; /* Keeps them behind your cat/disc (which are 1000) but above the background */
-            pointer-events: none; /* THIS IS MAGIC: It makes the image "ghostly" so you can still click buttons underneath it on PC! */
         }
     </script>
 </body>
