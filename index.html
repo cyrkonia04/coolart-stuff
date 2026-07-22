@@ -52,19 +52,7 @@
             font-weight: bold;
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
-            overflow: hidden; /* NEW: Magically keeps the text inside the box */
-            white-space: nowrap; /* NEW: Stops the text from wrapping to a new line */
-        }
-        
-        .marquee-text {
-            display: inline-block;
-            padding-left: 100%; /* Starts the text off-screen to the right */
-            animation: scrollLeft 12s linear infinite; /* 12s is a good speed */
-        }
-
-        @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            overflow: hidden; /* This is the magic that forces it to scroll on PC! */
         }
 
         /* Tab Buttons */
@@ -284,10 +272,9 @@
     
     <!-- CHAOTIC MARQUEE -->
     <div class="marquee">
-        <div class="marquee-text">
-            ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <marquee behavior="scroll" direction="left" scrollamount="5">
             ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
-        </div>
+        </marquee>
     </div>
 
         <!-- ACCESSIBILITY TOGGLE -->
