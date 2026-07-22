@@ -46,13 +46,13 @@
 
         /* Scrolling Marquee (Very 2000s Scene) */
         .marquee {
+            display: block; /* Forces the pink box to act like a normal block */
             background: #ff00ff;
             color: #ffff00;
             padding: 5px 0;
             font-weight: bold;
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
-            overflow: hidden; /* This is the magic that forces it to scroll on PC! */
         }
 
         /* Tab Buttons */
@@ -271,11 +271,9 @@
     <h1>★ MAVEMA'S COMMISSIONS ★</h1>
     
     <!-- CHAOTIC MARQUEE -->
-    <div class="marquee">
-        <marquee behavior="scroll" direction="left" scrollamount="5">
-            ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
-        </marquee>
-    </div>
+    <marquee class="marquee" behavior="scroll" direction="left" scrollamount="5">
+        ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
+    </marquee>
 
         <!-- ACCESSIBILITY TOGGLE -->
     <div style="margin-bottom: 15px;">
