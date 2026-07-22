@@ -223,6 +223,56 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* --- COLORBLIND / HIGH CONTRAST MODE --- */
+        body.colorblind-mode {
+            background-color: #111111 !important;
+            color: #FFD700 !important; /* Bright Gold */
+        }
+        body.colorblind-mode::before {
+            opacity: 0 !important; /* Hides the background pattern completely */
+        }
+        body.colorblind-mode h1, body.colorblind-mode h2, body.colorblind-mode h3 {
+            color: #FFFFFF !important; /* Pure white for headers */
+            text-shadow: 2px 2px 0px #000000 !important; /* Drop shadow instead of neon glow */
+        }
+        body.colorblind-mode .marquee {
+            background: #222222 !important;
+            color: #FFFFFF !important;
+            border-color: #FFD700 !important;
+        }
+        body.colorblind-mode .tab-btn {
+            background: #222222 !important;
+            color: #FFFFFF !important;
+            border-color: #FFD700 !important;
+        }
+        body.colorblind-mode .tab-btn:hover, body.colorblind-mode .tab-btn.active {
+            background: #FFD700 !important;
+            color: #000000 !important;
+        }
+        body.colorblind-mode .tab-content {
+            background: #1a1a1a !important;
+            border-color: #FFD700 !important;
+        }
+        body.colorblind-mode .tab-content::before {
+            opacity: 0 !important; /* Hides the tab pattern */
+        }
+        body.colorblind-mode .art-piece {
+            border-color: #FFFFFF !important;
+        }
+        body.colorblind-mode a {
+            color: #FFD700 !important;
+            border-color: #FFFFFF !important;
+        }
+        /* ToS Specific fixes */
+        body.colorblind-mode .tos-pink, 
+        body.colorblind-mode .tos-green, 
+        body.colorblind-mode .tos-yellow, 
+        body.colorblind-mode .tos-red {
+            color: #FFFFFF !important;
+            border-color: #FFD700 !important;
+        }
+        /* Button styling update */
     </style>
 </head>
 <body>
@@ -235,6 +285,13 @@
         <div class="marquee-text">
             ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
         </div>
+    </div>
+
+        <!-- ACCESSIBILITY TOGGLE -->
+    <div style="margin-bottom: 15px;">
+        <button onclick="toggleColorblind()" id="cb-btn" style="background: transparent; border: 2px solid #ffff00; color: #ffff00; padding: 5px 10px; font-family: 'Comic Sans MS', cursive; cursor: pointer; border-radius: 10px;">
+            👁️ Toggle Colorblind / High-Contrast Mode
+        </button>
     </div>
 
     <!-- TABS NAVIGATION -->
