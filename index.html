@@ -19,7 +19,7 @@
             position: relative;
         }
 
-        /* --- NEW: BODY BACKGROUND PATTERN OVERLAY --- */
+        /* --- UPDATED: BODY BACKGROUND PATTERN OVERLAY --- */
         body::before {
             content: "";
             position: fixed;
@@ -27,11 +27,20 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-image: url('props/background.jpg'); /* CHANGE THIS TO YOUR IMAGE */
-            background-repeat: repeat;
-            opacity: 0.15; /* Low opacity for subtle pattern */
+            background-image: url('props/background.jpg'); 
+            background-repeat: no-repeat; /* Stops the weird cut-off tiling */
+            background-size: cover; /* Fills the screen without squishing */
+            background-position: center center; /* Keeps it centered if it gets cropped */
+            opacity: 0.15; /* Base opacity for Mobile (since you said it looks perfect!) */
             z-index: -1;
-            pointer-events: none; /* Lets you click through the overlay */
+            pointer-events: none; 
+        }
+
+        /* --- NEW: Lowers the opacity ONLY on PC screens --- */
+        @media (min-width: 768px) {
+            body::before {
+                opacity: 0.05; /* Much more subtle on PC. Change this number if it's still too bright! */
+            }
         }
 
         /* Glowing Header */
