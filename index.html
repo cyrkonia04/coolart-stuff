@@ -439,6 +439,24 @@
             div.innerHTML = `<img src="images/${img}" alt="Art by Mavema" style="width: 100%; height: 100%; object-fit: cover; border-radius: 17px;">`;
             grid.appendChild(div);
         });
+
+        // --- COLORBLIND MODE TOGGLE LOGIC ---
+        function toggleColorblind() {
+            // This adds or removes the 'colorblind-mode' class from the body
+            document.body.classList.toggle('colorblind-mode');
+            
+            // This just changes the text on the button so your friend knows what mode they are in
+            const btn = document.getElementById('cb-btn');
+            if (document.body.classList.contains('colorblind-mode')) {
+                btn.innerText = "🎨 Turn Scenecore Colors Back On!";
+                btn.style.borderColor = "#FFFFFF";
+                btn.style.color = "#FFFFFF";
+            } else {
+                btn.innerText = "👁️ Toggle Colorblind / High-Contrast Mode";
+                btn.style.borderColor = "#ffff00";
+                btn.style.color = "#ffff00";
+            }
+        }
     </script>
 </body>
 </html>
