@@ -311,30 +311,32 @@
             }
         }
 
-        /* --- LIGHTBOX STYLES --- */
+/* --- LIGHTBOX STYLES (FIXED CLICKING BUG) --- */
 .lightbox {
-    display: none; /* Hidden by default */
+    display: none; 
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.9); /* Dim the background */
-    z-index: 2000; /* Highest z-index so it sits above everything */
+    background-color: rgba(0, 0, 0, 0.9); 
+    z-index: 2000; 
     justify-content: center;
     align-items: center;
-    cursor: pointer; /* Changes mouse to a hand so they know to click to close */
+    cursor: pointer; 
+    pointer-events: none; /* THIS IS THE FIX: Stops the invisible box from blocking clicks! */
 }
 .lightbox.active {
-    display: flex; /* Shows up when active */
+    display: flex; 
+    pointer-events: auto; /* Re-enables clicks ONLY when the lightbox is actually open */
 }
 .lightbox img {
-    max-width: 90vw; /* Won't overflow the screen horizontally */
-    max-height: 90vh; /* Won't overflow the screen vertically */
+    max-width: 90vw; 
+    max-height: 90vh; 
     border: 4px solid #ff00ff;
-    box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff; /* Neon frame */
+    box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff; 
     border-radius: 10px;
-    animation: popIn 0.3s ease-out; /* Reuses your existing pop-in animation! */
+    animation: popIn 0.3s ease-out; 
 }
 
 /* --- MAKE GALLERY ART LOOK CLICKABLE --- */
@@ -348,26 +350,26 @@
     border-color: #00ffff;
 }
 
-/* --- NEW SIDE DECOR POSITIONS --- */
-/* 1. To the right of the ToS tab button */
+/* --- UPDATED SIDE DECOR POSITIONS --- */
+/* 1. To the right of the ToS tab button (Moved away from the edge!) */
 .decor-tos {
-    top: 140px; /* Tweak this number up/down to perfectly line up with your tabs! */
-    right: 5%;
-    width: 100px; /* Change to fit your image */
+    top: 115px; /* Tweak this if it's too high/low compared to your tabs */
+    left: 70%; /* Changed from 'right' to 'left' so it stays near the center buttons */
+    width: 120px; 
 }
 
-/* 2. Left of the Title (1/6th width = 16.66%) */
+/* 2. Left of the Title (Pushed further out & made bigger) */
 .decor-title-left {
-    top: 30px; /* Lines up roughly with the middle of your H1 title */
-    left: 16.66%;
-    width: 120px; /* Change to fit your image */
+    top: 30px; 
+    left: 5%; /* Pushed further to the edge */
+    width: 180px; /* Made it bigger! */
 }
 
-/* 3. Right of the Title (5/6th width = 16.66% from the right) */
+/* 3. Right of the Title (Pushed further out & made bigger) */
 .decor-title-right {
     top: 30px; 
-    right: 16.66%;
-    width: 120px; /* Change to fit your image */
+    right: 5%; /* Pushed further to the edge */
+    width: 180px; /* Made it bigger! */
 }
     </style>
 </head>
@@ -507,97 +509,74 @@
 
     <!-- JAVASCRIPT FOR TABS & GALLERY BUILDER -->
     <script>
-        // --- TAB SWITCHING LOGIC ---
-        function switchTab(tabId) {
-            // Hide all tabs
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // Remove active class from all buttons
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // Show the selected tab and activate its button
-            document.getElementById(tabId).classList.add('active');
-            
-            // Find the button that was clicked and activate it
-            event.currentTarget.classList.add('active');
-        }
-
-        // --- AUTOMATIC GALLERY BUILDER ---
-        const myArt = [
-            "bassieeggson.jpg",
-            "birthdayyay.jpg",
-            "lillium!.jpg",
-            "love4sinclair.jpg",
-            "sad_tipheret.png",
-            "scraps.jpg"
-            // 👉 WHEN YOU GET NEW ART, JUST ADD THE FILENAME HERE LIKE: "new_art.png",
-        ];
-
-        const grid = document.querySelector('.gallery-grid');
-        
-        myArt.forEach(img => {
-            const div = document.createElement('div');
-            div.className = 'art-piece';
-            div.innerHTML = `<img src="images/${img}" alt="Art by Mavema" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1px;">`;
-            grid.appendChild(div);
+    // --- TAB SWITCHING LOGIC ---
+    function switchTab(tabId) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(tab => {
+            tab.classList.remove('active');
         });
+        
+        // Remove active class from all buttons
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // Show the selected tab and activate its button
+        document.getElementById(tabId).classList.add('active');
+        
+        // Find the button that was clicked and activate it
+        event.currentTarget.classList.add('active');
+    }
 
-        // --- COLORBLIND MODE TOGGLE LOGIC ---
-        function toggleColorblind() {
-            // This adds or removes the 'colorblind-mode' class from the body
-            document.body.classList.toggle('colorblind-mode');
-            
-            // This just changes the text on the button so your friend knows what mode they are in
-            const btn = document.getElementById('cb-btn');
-            if (document.body.classList.contains('colorblind-mode')) {
-                btn.innerText = "🎨 Turn Scenecore Colors Back On!";
-                btn.style.borderColor = "#FFFFFF";
-                btn.style.color = "#FFFFFF";
-            } else {
-                btn.innerText = "👁️ Toggle Colorblind / High-Contrast Mode";
-                btn.style.borderColor = "#ffff00";
-                btn.style.color = "#ffff00";
-            }
-        }
+    // --- AUTOMATIC GALLERY BUILDER & LIGHTBOX LOGIC ---
+    const myArt = [
+        "bassieeggson.jpg",
+        "birthdayyay.jpg",
+        "lillium!.jpg",
+        "love4sinclair.jpg",
+        "sad_tipheret.png",
+        "scraps.jpg"
+        // 👉 WHEN YOU GET NEW ART, JUST ADD THE FILENAME HERE LIKE: "new_art.png",
+    ];
 
-        // --- AUTOMATIC GALLERY BUILDER & LIGHTBOX LOGIC ---
-const myArt = [
-    "bassieeggson.jpg",
-    "birthdayyay.jpg",
-    "lillium!.jpg",
-    "love4sinclair.jpg",
-    "sad_tipheret.png",
-    "scraps.jpg"
-    // 👉 WHEN YOU GET NEW ART, JUST ADD THE FILENAME HERE LIKE: "new_art.png",
-];
+    const grid = document.querySelector('.gallery-grid');
 
-const grid = document.querySelector('.gallery-grid');
-
-myArt.forEach(img => {
-    const div = document.createElement('div');
-    div.className = 'art-piece';
-    div.innerHTML = `<img src="images/${img}" alt="Art by Mavema" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1px;">`;
-    
-    // --- NEW: CLICK LISTENER FOR LIGHTBOX ---
-    div.addEventListener('click', function() {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        // Grabs the exact image link from the thumbnail and puts it in the lightbox
-        lightboxImg.src = this.querySelector('img').src; 
-        lightbox.classList.add('active');
+    myArt.forEach(img => {
+        const div = document.createElement('div');
+        div.className = 'art-piece';
+        div.innerHTML = `<img src="images/${img}" alt="Art by Mavema" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1px;">`;
+        
+        // CLICK LISTENER FOR LIGHTBOX
+        div.addEventListener('click', function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = this.querySelector('img').src; 
+            lightbox.classList.add('active');
+        });
+        
+        grid.appendChild(div);
     });
-    
-    grid.appendChild(div);
-});
 
-// --- NEW: FUNCTION TO CLOSE LIGHTBOX ---
-function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('active');
-}
+    // --- FUNCTION TO CLOSE LIGHTBOX ---
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+    }
+
+    // --- COLORBLIND MODE TOGGLE LOGIC ---
+    function toggleColorblind() {
+        document.body.classList.toggle('colorblind-mode');
+        
+        const btn = document.getElementById('cb-btn');
+        if (document.body.classList.contains('colorblind-mode')) {
+            btn.innerText = "🎨 Turn Scenecore Colors Back On!";
+            btn.style.borderColor = "#FFFFFF";
+            btn.style.color = "#FFFFFF";
+        } else {
+            btn.innerText = "👁️ Toggle Colorblind / High-Contrast Mode";
+            btn.style.borderColor = "#ffff00";
+            btn.style.color = "#ffff00";
+        }
+    }
     </script>
 </body>
 </html>
