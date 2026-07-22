@@ -471,6 +471,25 @@
                 btn.style.color = "#ffff00";
             }
         }
+
+        /* --- MOBILE FIXES --- */
+        @media (max-width: 600px) {
+            /* Forces exactly 2 tabs per line */
+            .tab-btn {
+            flex-basis: 45%; 
+        }
+        /* Hides ONLY the future extra decorations */
+        .side-decor {
+        display: none; 
+        }
+        }
+        /* --- BASE STYLES FOR FUTURE DECORATIONS --- */
+        /* Use this class on any new images you add to the sides! */
+        .side-decor {
+            position: fixed;
+            z-index: 999; /* Keeps them behind your cat/disc (which are 1000) but above the background */
+            pointer-events: none; /* THIS IS MAGIC: It makes the image "ghostly" so you can still click buttons underneath it on PC! */
+        }
     </script>
 </body>
 </html>
