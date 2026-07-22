@@ -46,13 +46,30 @@
 
         /* Scrolling Marquee (Very 2000s Scene) */
         .marquee {
-            display: block; /* Forces the pink box to act like a normal block */
             background: #ff00ff;
             color: #ffff00;
             padding: 5px 0;
             font-weight: bold;
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
+            overflow: hidden; /* Keeps the text inside the pink box */
+            white-space: nowrap; /* Stops text from wrapping down to the next line */
+        }
+
+        /* The invisible track that holds both copies of the text */
+        .marquee-track {
+            display: inline-flex; /* This makes the track exactly as wide as the text inside it */
+            animation: scrollLeft 15s linear infinite; /* 15s = speed. Lower = faster */
+        }
+
+        /* Adds a gap between the end of copy 1 and start of copy 2 */
+        .marquee-text {
+            padding-right: 50px; 
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); } /* Moves exactly one text-length, creating the loop */
         }
 
         /* Tab Buttons */
@@ -271,9 +288,12 @@
     <h1>★ MAVEMA'S COMMISSIONS ★</h1>
     
     <!-- CHAOTIC MARQUEE -->
-    <marquee class="marquee" behavior="scroll" direction="left" scrollamount="5">
-        ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
-    </marquee>
+    <div class="marquee">
+        <div class="marquee-track">
+            <span class="marquee-text">★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★</span>
+            <span class="marquee-text" aria-hidden="true">★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★</span>
+        </div>
+    </div>
 
         <!-- ACCESSIBILITY TOGGLE -->
     <div style="margin-bottom: 15px;">
