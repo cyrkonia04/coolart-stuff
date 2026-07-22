@@ -126,6 +126,32 @@
             overflow: hidden; /* Keeps the pattern inside the rounded borders */
         }
 
+        /* --- NEW: SECRET TOS BACKGROUND IMAGE --- */
+#tos::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('props/SECRET_IMAGE_HERE.jpg'); /* CHANGE THIS FILENAME */
+    background-size: cover; /* Makes it stretch to fit the box nicely */
+    background-position: center;
+    opacity: 0.08; /* Super faint! Turn this up to like 0.15 if it's too hard to see */
+    z-index: 0; 
+    pointer-events: none;
+}
+
+/* Pushes the NEON pattern ABOVE the secret image */
+#tos::before {
+    z-index: 1 !important; 
+}
+
+/* Pushes the ToS text ABOVE the NEON pattern so it stays readable */
+#tos > * {
+    z-index: 2 !important;
+}
+
         /* --- NEW: TAB BACKGROUND PATTERN OVERLAY --- */
         .tab-content::before {
             content: "";
@@ -432,7 +458,7 @@
         </ul>
 
         <h3 style="color: #ff00ff;">How to Order:</h3>
-        <p>Email me at <strong>mail mhmyesowow@gmail.com</strong> or DM me on (prolly discord account?) with your reference sheets and what you want! Be as descriptive as possible~!</p>
+        <p>Email me at <strong><a href="mailto:mhmyesowow@gmail.com">mhmyesowow@gmail.com</a></strong> or DM me on (prolly discord account?) with your reference sheets and what you want! Be as descriptive as possible~!</p>
     </div>
 
     <!-- TAB 4: TOS -->
@@ -577,6 +603,13 @@
             btn.style.color = "#ffff00";
         }
     }
+
+            // --- PRESS ESCAPE TO CLOSE LIGHTBOX ---
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeLightbox();
+        }
+    });
     </script>
 </body>
 </html>
