@@ -43,7 +43,6 @@
             text-shadow: 3px 3px 0px #00ff00, -2px -2px 10px #00ffff; /* Neon glow */
             margin-bottom: 10px;
         }
-
         /* Scrolling Marquee (Very 2000s Scene) */
         .marquee {
             background: #ff00ff;
@@ -52,27 +51,31 @@
             font-weight: bold;
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
-            overflow: hidden; /* Keeps text inside the box */
-            white-space: nowrap; /* Stops text from wrapping */
+            overflow: hidden; 
+            white-space: nowrap; 
         }
 
-        /* The track that holds the two copies */
+        /* The track is exactly 200% the width of the pink box */
         .marquee-track {
-            display: inline-flex; 
+            display: flex;
+            width: 200%; 
             animation: scrollLeft 15s linear infinite; 
         }
 
-        /* The magic that fixes PC screens */
+        /* Each text block takes up exactly half of the track (which equals 100% of the pink box) */
         .marquee-text {
-            display: inline-block;
-            min-width: 50%; /* Forces each text to take up AT LEAST half the screen, no matter how wide the monitor is */
-            text-align: center; /* Centers the text inside that giant box */
-            padding-right: 50px; /* Adds a nice gap so the looping text doesn't touch */
+            flex: 0 0 50%; 
+            /* This centers the text inside its half of the track */
+            display: flex;
+            justify-content: center;
+            /* Adds the gap between the looping texts */
+            padding-right: 100px; 
         }
 
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Slides exactly one "lane" over */
+            /* Moves exactly 100% of the pink box's width */
+            100% { transform: translateX(-50%); } 
         }
 
         /* Tab Buttons */
