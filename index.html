@@ -474,15 +474,20 @@
 
         /* --- MOBILE FIXES --- */
         @media (max-width: 600px) {
-            /* Forces exactly 2 tabs per line */
+            /* Forces exactly 2 tabs per line - NO SQUISHING ALLOWED */
             .tab-btn {
-            flex-basis: 45%; 
+            width: calc(50% - 5px); /* Exactly 50% width minus half the 10px gap */
+            flex-grow: 0; /* Stops it from stretching to fill empty space */
+            flex-shrink: 0; /* STOPS FLEXBOX FROM SQUISHING IT TO FIT 3 IN A ROW */
+            text-align: center; /* Keeps the text centered in the new fixed-width box */
         }
+
         /* Hides ONLY the future extra decorations */
         .side-decor {
-        display: none; 
+            display: none; 
         }
-        }
+    }
+        
         /* --- BASE STYLES FOR FUTURE DECORATIONS --- */
         /* Use this class on any new images you add to the sides! */
         .side-decor {
