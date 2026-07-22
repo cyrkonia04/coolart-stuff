@@ -310,6 +310,65 @@
                 display: none; 
             }
         }
+
+        /* --- LIGHTBOX STYLES --- */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9); /* Dim the background */
+    z-index: 2000; /* Highest z-index so it sits above everything */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* Changes mouse to a hand so they know to click to close */
+}
+.lightbox.active {
+    display: flex; /* Shows up when active */
+}
+.lightbox img {
+    max-width: 90vw; /* Won't overflow the screen horizontally */
+    max-height: 90vh; /* Won't overflow the screen vertically */
+    border: 4px solid #ff00ff;
+    box-shadow: 0 0 30px #ff00ff, 0 0 60px #00ffff; /* Neon frame */
+    border-radius: 10px;
+    animation: popIn 0.3s ease-out; /* Reuses your existing pop-in animation! */
+}
+
+/* --- MAKE GALLERY ART LOOK CLICKABLE --- */
+.art-piece {
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.art-piece:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 15px #00ffff;
+    border-color: #00ffff;
+}
+
+/* --- NEW SIDE DECOR POSITIONS --- */
+/* 1. To the right of the ToS tab button */
+.decor-tos {
+    top: 140px; /* Tweak this number up/down to perfectly line up with your tabs! */
+    right: 5%;
+    width: 100px; /* Change to fit your image */
+}
+
+/* 2. Left of the Title (1/6th width = 16.66%) */
+.decor-title-left {
+    top: 30px; /* Lines up roughly with the middle of your H1 title */
+    left: 16.66%;
+    width: 120px; /* Change to fit your image */
+}
+
+/* 3. Right of the Title (5/6th width = 16.66% from the right) */
+.decor-title-right {
+    top: 30px; 
+    right: 16.66%;
+    width: 120px; /* Change to fit your image */
+}
     </style>
 </head>
 <body>
@@ -436,6 +495,16 @@
     <!-- --- SPINNING IMAGE (Left) --- -->
     <img src="props/cooldisc.jpg" alt="Spinning Icon" class="spinning-img">
 
+    <!-- LIGHTBOX POPUP CONTAINER -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img src="" alt="Art enlarged" id="lightbox-img">
+</div>
+
+<!-- NEW SIDE DECORATIONS (Uses your side-decor class!) -->
+<img src="props/noai.jpg" alt="Decor" class="side-decor decor-tos">
+<img src="props/smile!.jpg" alt="Decor" class="side-decor decor-title-left">
+<img src="props/smile!.jpg" alt="Decor" class="side-decor decor-title-right">
+
     <!-- JAVASCRIPT FOR TABS & GALLERY BUILDER -->
     <script>
         // --- TAB SWITCHING LOGIC ---
@@ -494,6 +563,41 @@
                 btn.style.color = "#ffff00";
             }
         }
+
+        // --- AUTOMATIC GALLERY BUILDER & LIGHTBOX LOGIC ---
+const myArt = [
+    "bassieeggson.jpg",
+    "birthdayyay.jpg",
+    "lillium!.jpg",
+    "love4sinclair.jpg",
+    "sad_tipheret.png",
+    "scraps.jpg"
+    // 👉 WHEN YOU GET NEW ART, JUST ADD THE FILENAME HERE LIKE: "new_art.png",
+];
+
+const grid = document.querySelector('.gallery-grid');
+
+myArt.forEach(img => {
+    const div = document.createElement('div');
+    div.className = 'art-piece';
+    div.innerHTML = `<img src="images/${img}" alt="Art by Mavema" style="width: 100%; height: 100%; object-fit: cover; border-radius: 1px;">`;
+    
+    // --- NEW: CLICK LISTENER FOR LIGHTBOX ---
+    div.addEventListener('click', function() {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        // Grabs the exact image link from the thumbnail and puts it in the lightbox
+        lightboxImg.src = this.querySelector('img').src; 
+        lightbox.classList.add('active');
+    });
+    
+    grid.appendChild(div);
+});
+
+// --- NEW: FUNCTION TO CLOSE LIGHTBOX ---
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+}
     </script>
 </body>
 </html>
