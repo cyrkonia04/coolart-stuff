@@ -52,12 +52,14 @@
             font-weight: bold;
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
+            overflow: hidden; /* NEW: Magically keeps the text inside the box */
+            white-space: nowrap; /* NEW: Stops the text from wrapping to a new line */
         }
+        
         .marquee-text {
             display: inline-block;
-            white-space: nowrap;
             padding-left: 100%; /* Starts the text off-screen to the right */
-            animation: scrollLeft 10s linear infinite; /* 10s = speed. Lower = faster */
+            animation: scrollLeft 12s linear infinite; /* 12s is a good speed */
         }
 
         @keyframes scrollLeft {
@@ -283,6 +285,7 @@
     <!-- CHAOTIC MARQUEE -->
     <div class="marquee">
         <div class="marquee-text">
+            ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
         </div>
     </div>
