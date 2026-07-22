@@ -53,6 +53,17 @@
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
         }
+        .marquee-text {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%; /* Starts the text off-screen to the right */
+            animation: scrollLeft 10s linear infinite; /* 10s = speed. Lower = faster */
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
 
         /* Tab Buttons */
         .tab-container {
@@ -221,9 +232,9 @@
     
     <!-- CHAOTIC MARQUEE -->
     <div class="marquee">
-        <marquee behavior="scroll" direction="left" scrollamount="5">
+        <div class="marquee-text">
             ★ OPEN FOR COMMISSIONS ★ SCENECORE VIBES OR SOMETHING ★ I HOPE THIS WORKS ★
-        </marquee>
+        </div>
     </div>
 
     <!-- TABS NAVIGATION -->
