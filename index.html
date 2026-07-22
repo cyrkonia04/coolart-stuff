@@ -52,24 +52,27 @@
             font-weight: bold;
             border: 3px dashed #00ff00;
             margin-bottom: 20px;
-            overflow: hidden; /* Keeps the text inside the pink box */
-            white-space: nowrap; /* Stops text from wrapping down to the next line */
+            overflow: hidden; /* Keeps text inside the box */
+            white-space: nowrap; /* Stops text from wrapping */
         }
 
-        /* The invisible track that holds both copies of the text */
+        /* The track that holds the two copies */
         .marquee-track {
-            display: inline-flex; /* This makes the track exactly as wide as the text inside it */
-            animation: scrollLeft 15s linear infinite; /* 15s = speed. Lower = faster */
+            display: inline-flex; 
+            animation: scrollLeft 15s linear infinite; 
         }
 
-        /* Adds a gap between the end of copy 1 and start of copy 2 */
+        /* The magic that fixes PC screens */
         .marquee-text {
-            padding-right: 50px; 
+            display: inline-block;
+            min-width: 50%; /* Forces each text to take up AT LEAST half the screen, no matter how wide the monitor is */
+            text-align: center; /* Centers the text inside that giant box */
+            padding-right: 50px; /* Adds a nice gap so the looping text doesn't touch */
         }
 
         @keyframes scrollLeft {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* Moves exactly one text-length, creating the loop */
+            100% { transform: translateX(-50%); } /* Slides exactly one "lane" over */
         }
 
         /* Tab Buttons */
